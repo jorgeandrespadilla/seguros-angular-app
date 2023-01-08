@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { LoggerService } from "./logger.service";
+import { LoggerService } from "@shared/services/logger.service";
 
 export abstract class BaseService {
   constructor(

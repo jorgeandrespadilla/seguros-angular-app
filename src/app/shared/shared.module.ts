@@ -11,12 +11,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppConfig, APP_CONFIG } from '../config/app.config';
 import { ApiConfig, API_CONFIG } from '../config/api.config';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
   ],
   imports: [
     CommonModule,
+    RouterModule,
     HttpClientModule,
   ],
   providers: [
@@ -25,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [
     CommonModule,
+    RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
     MatCardModule,

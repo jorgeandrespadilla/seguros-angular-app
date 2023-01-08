@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiConfig } from '@app/config/api.config';
-import { AppConfig } from '@app/config/app.config';
-import { BaseService } from '@app/shared/services/base.service';
-import { LoggerService } from '@app/shared/services/logger.service';
+import { ApiConfig } from '@config/api.config';
+import { AuthService } from '@shared/services/auth.service';
+import { BaseService } from '@shared/services/abstractions/base.service';
+import { LoggerService } from '@shared/services/logger.service';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { LoginRequest, LoginResponse } from './types';
@@ -11,9 +11,10 @@ import { LoginRequest, LoginResponse } from './types';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService extends BaseService {
+export class LoginService extends BaseService {
   constructor(
     logger: LoggerService,
+    private authenticationService: AuthService,
     private http: HttpClient,
   ) {
     super(logger);
@@ -24,8 +25,12 @@ export class AuthenticationService extends BaseService {
     .pipe(
       catchError(this.handleError<LoginResponse>(this.login.name)),
       tap((response) => {
-        sessionStorage.setItem(AppConfig.storage.keys.accessToken, response.token);
+        this.authenticationService.login(response.token);
       }),
     );
+  }
+
+  logout(): void {
+    this.authenticationService.logout();
   }
 }

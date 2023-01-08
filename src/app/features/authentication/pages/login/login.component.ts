@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APP_CONFIG } from '@config/app.config';
 import { AppConfig, Currency } from '@config/types';
-import { AuthenticationService } from '@features/authentication/services/authentication.service';
+import { LoginService } from '@app/features/authentication/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +19,14 @@ export class LoginComponent {
   });
 
   constructor(
-    private authService: AuthenticationService,
+    private loginService: LoginService,
     private router: Router,
     @Inject(APP_CONFIG) public appConfig: AppConfig,
   ) { }
+
+  ngOnInit(): void {
+    this.loginService.logout();
+  }
 
   togglePassword() {
     this.revealPassword = !this.revealPassword;
@@ -38,12 +42,11 @@ export class LoginComponent {
       password: this.loginForm.value.password ?? '',
       currency: this.loginForm.value.currency ?? 'USD',
     };
-    this.authService.login(request)
+    this.loginService.login(request)
       .subscribe({
         complete: () => {
           console.log('AuthenticationService.login() complete');
-          // Redirect to home page
-          this.router.navigate(['/']);
+          this.router.navigate([this.appConfig.routes.root.fullPath]);
         },
         error: (error) => {
           console.error('AuthenticationService.login() error:', error);
