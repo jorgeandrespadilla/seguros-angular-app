@@ -7,7 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { AppConfig, APP_CONFIG } from '../config/app.config';
 import { ApiConfig, API_CONFIG } from '../config/api.config';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,6 +25,7 @@ import { RouterModule } from '@angular/router';
   providers: [
     { provide: APP_CONFIG, useValue: AppConfig },
     { provide: API_CONFIG, useValue: ApiConfig },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
   ],
   exports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
   ]
 })
 export class SharedModule { }

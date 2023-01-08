@@ -1,9 +1,11 @@
-<div>
-  <h1>Page not found</h1>
-  <p>Sorry, but the page you were trying to view does not exist.</p>
-  <p>It looks like this was the result of either:</p>
-  <ul>
-    <li>a mistyped address</li>
-    <li>an out-of-date link</li>
-  </ul>
+<div class="not-found__container">
+  <div class="not-found__content">
+    <h1 class="not-found__title">404</h1>
+    <p class="not-found__description">Página no encontrada</p>
+    <div class="not-found__actions">
+      <a mat-raised-button color="primary" routerLink="{{ appConfig.routes.home.fullPath }}">
+        Volver al inicio
+      </a>
+    </div>
+  </div>
 </div>
