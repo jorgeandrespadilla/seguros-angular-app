@@ -7,5 +7,11 @@ export const APP_CONFIG = new InjectionToken<AppConfigType>('app.config');
 export const AppConfig = {
   title: environment.title,
   production: environment.production,
+  storage: {
+    keys: {
+      accessToken: `access_token`,
+    },
+  },
   currencies: ['USD', 'EUR', 'RMB'] as const,
+  logLevels: ['debug', 'info', 'warn', 'error'] as const,
 }

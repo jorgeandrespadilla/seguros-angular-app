@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./features/authentication/authentication.module').then(m => m.AuthenticationModule) },
   { path: 'home', component: HomeComponent },
   { path: '404', component: NotFoundComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: '404'}
 ];
 
