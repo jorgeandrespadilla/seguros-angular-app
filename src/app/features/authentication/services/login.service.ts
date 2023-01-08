@@ -5,7 +5,7 @@ import { AuthService } from '@shared/services/auth.service';
 import { BaseService } from '@shared/services/abstractions/base.service';
 import { LoggerService } from '@shared/services/logger.service';
 import { Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { LoginRequest, LoginResponse } from './types';
 
 @Injectable({
@@ -21,12 +21,19 @@ export class LoginService extends BaseService {
   }
 
   login(request: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(ApiConfig.url(ApiConfig.endpoints.authentication.login), request)
+    return this.http.post(ApiConfig.url(ApiConfig.endpoints.authentication.login), request, {
+      responseType: 'text'
+    })
     .pipe(
-      catchError(this.handleError<LoginResponse>(this.login.name)),
+      catchError(this.handleError<string>(this.login.name)),
       tap((response) => {
-        this.authenticationService.login(response.token);
+        this.authenticationService.login(response);
       }),
+      map((response) => {
+        return {
+          token: response
+        } as LoginResponse;
+      })
     );
   }
 
