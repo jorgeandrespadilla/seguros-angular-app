@@ -6,10 +6,15 @@ export const APP_CONFIG = new InjectionToken<AppConfigType>('app.config');
 
 const routeNames = {
   authenticationIndex: 'auth',
-  home: 'home',
+  applicationsIndex: 'applications',
   notFound: '404',
   authentication: {
     login: 'login',
+  },
+  applications: {
+    dashboard: 'dashboard',
+    new: 'new',
+    detail: 'detail/:id',
   },
 } as const;
 
@@ -24,6 +29,8 @@ export const AppConfig = {
   currencies: ['USD', 'EUR', 'RMB'] as const,
   logLevels: ['debug', 'info', 'warn', 'error'] as const,
   routes: {
+    all: '**',
+    home: `/${routeNames.applicationsIndex}/${routeNames.applications.dashboard}`,
     root: {
       currentPath: '',
       fullPath: '/',
@@ -36,9 +43,21 @@ export const AppConfig = {
         fullPath: `/${routeNames.authenticationIndex}/${routeNames.authentication.login}`,
       },
     },
-    home: {
-      currentPath: routeNames.home,
-      fullPath: `/${routeNames.home}`,
+    applications: {
+      currentPath: routeNames.applicationsIndex,
+      fullPath: `/${routeNames.applicationsIndex}`,
+      dashboard: {
+        currentPath: routeNames.applications.dashboard,
+        fullPath: `/${routeNames.applicationsIndex}/${routeNames.applications.dashboard}`,
+      },
+      new: {
+        currentPath: routeNames.applications.new,
+        fullPath: `/${routeNames.applicationsIndex}/${routeNames.applications.new}`,
+      },
+      detail: {
+        currentPath: routeNames.applications.detail,
+        fullPath: `/${routeNames.applicationsIndex}/${routeNames.applications.detail}`,
+      },
     },
     notFound: {
       currentPath: routeNames.notFound,

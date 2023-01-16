@@ -21,18 +21,11 @@ export class LoginService extends BaseService {
   }
 
   login(request: LoginRequest): Observable<LoginResponse> {
-    return this.http.post(ApiConfig.url(ApiConfig.endpoints.authentication.login), request, {
-      responseType: 'text'
-    })
+    return this.http.post<LoginResponse>(ApiConfig.url(ApiConfig.endpoints.authentication.login), request)
     .pipe(
-      catchError(this.handleError<string>(this.login.name)),
+      catchError(this.handleError<LoginResponse>(this.login.name)),
       tap((response) => {
-        this.authenticationService.login(response);
-      }),
-      map((response) => {
-        return {
-          token: response
-        } as LoginResponse;
+        this.authenticationService.login(response.token);
       })
     );
   }
