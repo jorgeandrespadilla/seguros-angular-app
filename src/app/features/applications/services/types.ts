@@ -11,5 +11,5 @@ export interface Application extends AddApplication {
 export interface Company {
   id:          number;
   name:        string;
-  applications: Application[];
+  application: Application[];
 }

@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: AppConfig.routes.applications.currentPath,
     loadChildren: () => import('./features/applications/applications.module').then(m => m.ApplicationsModule),
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: AppConfig.routes.notFound.currentPath,

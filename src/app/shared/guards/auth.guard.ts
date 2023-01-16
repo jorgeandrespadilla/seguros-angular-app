@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AppConfig } from '@app/config/app.config';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,25 +10,18 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
+    private authService: AuthService
   ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(this.isUserAuthenticated());
-      console.log(sessionStorage.getItem(AppConfig.storage.keys.accessToken));
-
-    if (this.isUserAuthenticated()) {
+    if (this.authService.isAuthenticated()) {
       return true;
     } else {
       this.redirectToLogin();
       return false;
     }
-  }
-
-  private isUserAuthenticated(): boolean {
-    const token = sessionStorage.getItem(AppConfig.storage.keys.accessToken);
-    return token !== null && token !== undefined && token !== '';
   }
 
   private redirectToLogin(): void {

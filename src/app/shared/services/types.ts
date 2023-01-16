@@ -1,4 +1,5 @@
 import { LogLevel } from "@app/config/types";
+import { JwtPayload } from "jwt-decode";
 
 export interface LogEntry {
   type: LogLevel;
@@ -6,7 +7,7 @@ export interface LogEntry {
   data?: any;
 }
 
-export interface TokenData {
+export type TokenData = JwtPayload & {
   role: string;
   username: string;
   companyId: number;

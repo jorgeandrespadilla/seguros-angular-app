@@ -14,8 +14,13 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    const token = this.getRawAccessToken();
-    return token !== null && token !== undefined && token !== '';
+    const tokenData = this.getAccessToken()
+    if (tokenData && tokenData.exp) {
+      const now = new Date();
+      const exp = new Date(tokenData?.exp * 1000);
+      return now < exp;
+    }
+    return false;
   }
 
   public login(accessToken: string): void {
