@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from '@app/config/app.config';
+import jwtDecode from 'jwt-decode';
+import { TokenData } from './types';
 
 const accessTokenKey = AppConfig.storage.keys.accessToken;
 
@@ -12,7 +14,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    const token = this.getAccessToken();
+    const token = this.getRawAccessToken();
     return token !== null && token !== undefined && token !== '';
   }
 
@@ -24,7 +26,24 @@ export class AuthService {
     localStorage.removeItem(accessTokenKey);
   }
 
-  public getAccessToken(): string {
+  public getRawAccessToken(): string {
     return localStorage.getItem(accessTokenKey) ?? "";
   }
+
+  public getAccessToken(): TokenData {
+    return this.tryDecodeToken(this.getRawAccessToken());
+  }
+
+  private tryDecodeToken(token: string): TokenData {
+    try {
+      return jwtDecode(token);
+    } catch (error) {
+      return {
+        companyId: 0,
+        role: '',
+        username: '',
+      } as TokenData;
+    }
+  }
+
 }

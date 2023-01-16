@@ -26,6 +26,11 @@ export const AppConfig = {
       accessToken: `access_token`,
     },
   },
+  roles: {
+    employee: 'Employee',
+    executive: 'Executive',
+    all: ['Employee', 'Executive'],
+  },
   currencies: ['USD', 'EUR', 'RMB'] as const,
   logLevels: ['debug', 'info', 'warn', 'error'] as const,
   routes: {

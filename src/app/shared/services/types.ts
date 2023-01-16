@@ -5,3 +5,9 @@ export interface LogEntry {
   message: string;
   data?: any;
 }
+
+export interface TokenData {
+  role: string;
+  username: string;
+  companyId: number;
+}
