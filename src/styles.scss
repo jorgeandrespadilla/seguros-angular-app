@@ -3,7 +3,10 @@
 @import "app/styles/global";
 
 .main__content {
-  margin: 20px;
+  margin: 0 auto;
+  display: block;
+  max-width: 1200px;
+  padding: 40px;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);

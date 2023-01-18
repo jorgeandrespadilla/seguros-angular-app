@@ -1,6 +1,23 @@
-.main__content__header {
+.main-content__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.applications-list {
+  margin-bottom: 36px;
+}
+
+.application-card {
+  width: 100%;
+  height: calc(100% - 4px);
+  border: 1px solid #e0e0e0;
+}
+
+.application-card__content {
+  margin-top: 16px;
+  & > p {
+    text-overflow: ellipsis;
+  }
 }
