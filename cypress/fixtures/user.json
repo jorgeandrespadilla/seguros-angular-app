@@ -1,4 +1,10 @@
 {
-  "username": "admin@test.com",
-  "password": "admin123"
+  "executive": {
+    "username": "admin@admin.com",
+    "password": "Password123!"
+  },
+  "employee": {
+    "username": "user@fybeca.com",
+    "password": "Password123!"
+  }
 }

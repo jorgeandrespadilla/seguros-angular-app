@@ -2,7 +2,9 @@
 <div class="main__content">
   <div class="main-content__header">
     <h1>Aplicaciones</h1>
-    <a *ngIf="canAddApplication" mat-raised-button color="primary" routerLink="/applications/new">Nueva Aplicación</a>
+    <a *ngIf="canAddApplication" mat-raised-button color="primary" routerLink="/applications/new" data-cy="add-application-button">
+      Nueva Aplicación
+    </a>
   </div>
   <div *ngFor="let company of $companies | async; let i = index">
     <h2>{{ company.name }}</h2>
