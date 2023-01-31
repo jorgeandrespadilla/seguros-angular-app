@@ -38,12 +38,18 @@
 
       <mat-form-field>
         <mat-label>Fecha de embarque</mat-label>
-        <input matInput formControlName="fechaEmbarque" type="text" />
+        <input matInput [matDatepicker]="fechaEmbarque" formControlName="fechaEmbarque" type="text" />
+        <mat-hint>MM/DD/YY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fechaEmbarque"></mat-datepicker-toggle>
+        <mat-datepicker #fechaEmbarque></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Fecha llegada</mat-label>
-        <input matInput formControlName="fechaEmbarque" type="text" />
+        <mat-label>Fecha de llegada</mat-label>
+        <input matInput [matDatepicker]="fechaLlegada" formControlName="fechaLlegada" type="text" />
+        <mat-hint>MM/DD/YY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fechaLlegada"></mat-datepicker-toggle>
+        <mat-datepicker #fechaLlegada></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field>
@@ -58,7 +64,7 @@
 
       <mat-form-field>
         <mat-label>Orden de compra </mat-label>
-        <input matInput formControlName="ordenDeCompra" type="text" />
+        <input matInput formControlName="ordenDeCompra" type="number" min="0" />
       </mat-form-field>
 
       <mat-form-field>
