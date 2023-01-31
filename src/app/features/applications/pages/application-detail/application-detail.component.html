@@ -1,1 +1,15 @@
 <p>application-detail works!</p>
+
+<div *ngIf="applicationDetail">
+    <strong> Numero de poliza: </strong> {{applicationDetail.policyNumber}}
+    <strong> Descripcion: </strong> {{applicationDetail.description}}
+    <strong> Desde: </strong> {{applicationDetail.desde}}
+    <strong> Hasta: </strong> {{applicationDetail.hasta}}
+    <strong> Tipo de transporte: </strong> {{applicationDetail.tipoTransporte}}
+    <strong> Perteneciente: </strong> {{applicationDetail.perteneciente}}
+    <strong> Fecha de embarque: </strong> {{applicationDetail.fechaEmbarque}}
+    <strong> Fecha de llegada: </strong> {{applicationDetail.fechaLlegada}}
+    <strong> Embarcado por: </strong> {{applicationDetail.embarcadoPor}}
+    <strong> Nota de pedido: </strong> {{applicationDetail.notaDePedido}}
+    
+</div>

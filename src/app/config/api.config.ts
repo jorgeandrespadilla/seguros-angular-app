@@ -13,6 +13,7 @@ export const ApiConfig = {
     applications: {
       companies: '/Companies',
       addApplication: '/Companies/Application',
+      getApplication: '/Companies/Application/{id}',
     },
   },
   url: (path: string) => ApiConfig.baseUrl + path,

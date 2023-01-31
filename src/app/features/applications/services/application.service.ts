@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiConfig } from '@app/config/api.config';
 import { map, Observable } from 'rxjs';
-import { AddApplication, Company } from './types';
+import { AddApplication, ApplicationDetail, Company } from './types';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,9 @@ export class ApplicationService {
     return this.http.post(ApiConfig.url(ApiConfig.endpoints.applications.addApplication), application, {
       observe: 'response',
     });
+  }
+
+  getApplication(id: number) {
+    return this.http.get<ApplicationDetail>(ApiConfig.url(ApiConfig.endpoints.applications.getApplication.replace('{id}', id.toString())));
   }
 }

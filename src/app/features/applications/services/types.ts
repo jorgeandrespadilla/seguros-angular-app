@@ -30,6 +30,8 @@ export interface Application {
   description: string;
 }
 
+export interface ApplicationDetail extends AddApplication, Application { }
+
 export interface Company {
   id: number;
   name: string;
