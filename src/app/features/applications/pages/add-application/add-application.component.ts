@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { APP_CONFIG } from '@app/config/app.config';
 import { AppConfig } from '@app/config/types';
 import { ApplicationService } from '../../services/application.service';
+import { AddApplication } from '../../services/types';
 
 @Component({
   selector: 'app-add-application',
@@ -12,37 +13,29 @@ import { ApplicationService } from '../../services/application.service';
 })
 export class AddApplicationComponent {
   addApplicationForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    policyNumber: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    asegurado: new FormControl('', [Validators.required]), // dropdown
-    pagador : new FormControl('', [Validators.required]), //dropdown
     desde : new FormControl('', [Validators.required]), // texto
     hasta : new FormControl('', [Validators.required]),
-    tipo_transporte : new FormControl('', [Validators.required]), //dropdown
+    tipoTransporte : new FormControl('', [Validators.required]), //dropdown
     perteneciente : new FormControl('', [Validators.required]),
-    fecha_embarque : new FormControl('', [Validators.required]),
-    embarcado_por : new FormControl('', [Validators.required]),
-    nota_de_pedido : new FormControl('', [Validators.required]), //dropdown
-    incoterms_buscar : new FormControl('', [Validators.required]),
-    orden_de_compra : new FormControl('', [Validators.required]),
-    afianzador_de_aduana : new FormControl('', [Validators.required]),
-    items : new FormControl('', [Validators.required]), // Dropdown
+    fechaEmbarque: new FormControl('', [Validators.required]),
+    fechaLlegada: new FormControl('', [Validators.required]),
+    embarcadoPor : new FormControl('', [Validators.required]),
+    notaDePedido : new FormControl('', [Validators.required]), //dropdown
+    ordenDeCompra : new FormControl('', [Validators.required]),
+    
     marca : new FormControl('', [Validators.required]),
-    descripcion_contenido : new FormControl('', [Validators.required]),
-    num : new FormControl('', [Validators.required]),
-    peso_bruto : new FormControl('', [Validators.required]),
-    bultos : new FormControl('', [Validators.required]),
+    descripcionContenido : new FormControl('', [Validators.required]),
+    pesoBruto : new FormControl('', [Validators.required]),
     observaciones : new FormControl('', [Validators.required]),
-    monto_total_compra : new FormControl('', [Validators.required]),
-    porcentaje_gastos_justificados : new FormControl('', [Validators.required]),
-    suma_aseguradas : new FormControl('', [Validators.required]),
+    montoTotalCompra : new FormControl('', [Validators.required]),
+    porcentajeGastosJustificados : new FormControl('', [Validators.required]),
+    sumaAseguradas : new FormControl('', [Validators.required]),
     tasa : new FormControl('', [Validators.required]),
-    valor_prima : new FormControl('', [Validators.required]),
+    valorPrima : new FormControl('', [Validators.required]),
     cobertura : new FormControl('', [Validators.required]),
     deducible : new FormControl('', [Validators.required]),
-    objeto_seguro : new FormControl('', [Validators.required])
-
+    objetoSeguro : new FormControl('', [Validators.required])
   });
 
   constructor(
@@ -52,15 +45,32 @@ export class AddApplicationComponent {
   ) { }
 
   onSubmit() {
-    // Validate form
-    /* if (!this.addApplicationForm.valid) {
-      return;
-    } */
-    const request = {
-      name: this.addApplicationForm.value.name ?? '',
-      policyNumber: this.addApplicationForm.value.policyNumber ?? '',
-      description: this.addApplicationForm.value.description ?? '',
+    const request: AddApplication = {
+      description: this.addApplicationForm.get('description')?.value!,
+      desde: this.addApplicationForm.get('desde')?.value!,
+      hasta: this.addApplicationForm.get('hasta')?.value!,
+      tipoTransporte: this.addApplicationForm.get('tipoTransporte')?.value!,
+      perteneciente: this.addApplicationForm.get('perteneciente')?.value!,
+      fechaEmbarque: new Date(this.addApplicationForm.get('fechaEmbarque')?.value!),
+      fechaLlegada: new Date(this.addApplicationForm.get('fechaLlegada')?.value!),
+      embarcadoPor: this.addApplicationForm.get('embarcadoPor')?.value!,
+      notaDePedido: this.addApplicationForm.get('notaDePedido')?.value!,
+      ordenDeCompra: Number(this.addApplicationForm.get('ordenDeCompra')?.value!),
+      
+      marca: this.addApplicationForm.get('marca')?.value!,
+      descripcionContenido: this.addApplicationForm.get('descripcionContenido')?.value!,
+      pesoBruto: Number(this.addApplicationForm.get('pesoBruto')?.value!),
+      observaciones: this.addApplicationForm.get('observaciones')?.value!,
+      montoTotalCompra: Number(this.addApplicationForm.get('montoTotalCompra')?.value!),
+      porcentajeGastosJustificados: Number(this.addApplicationForm.get('porcentajeGastosJustificados')?.value!),
+      sumaAseguradas: Number(this.addApplicationForm.get('sumaAseguradas')?.value!),
+      tasa: this.addApplicationForm.get<string>('tasa')?.value!,
+      valorPrima: Number(this.addApplicationForm.get('valorPrima')?.value!),
+      cobertura: this.addApplicationForm.get('cobertura')?.value!,
+      deducible: Number(this.addApplicationForm.get('deducible')?.value!),
+      objetoSeguro: this.addApplicationForm.get('objetoSeguro')?.value!
     };
+    debugger
     this.applicationService.addApplication(request)
       .subscribe({
         complete: () => {
