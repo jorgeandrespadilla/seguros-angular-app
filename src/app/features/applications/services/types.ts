@@ -9,7 +9,6 @@ export interface AddApplication {
   embarcadoPor: string,
   notaDePedido: string,
   ordenDeCompra: number,
-
   marca: string,
   descripcionContenido: string,
   pesoBruto: number,
@@ -28,6 +27,7 @@ export interface Application {
   id: number;
   policyNumber: number;
   description: string;
+  fechaCreacion: Date;
 }
 
 export interface ApplicationDetail extends AddApplication, Application { }
@@ -36,4 +36,9 @@ export interface Company {
   id: number;
   name: string;
   application: Application[];
+}
+
+export interface GetCompanies {
+  fechaInicio?: Date;
+  fechaFin?: Date;
 }
