@@ -32,6 +32,10 @@ export const AppConfig = {
     all: ['Employee', 'Executive'],
   },
   currencies: ['USD', 'EUR', 'RMB'] as const,
+  asegurado: ['Usuario 1', 'Usuario 2'] as const, 
+  pagador : ['Seguros del Sur', 'Default Payer', 'Undefined'] as const,
+  TipoTransporte : ['Aire', 'Tierra', 'Mar'] as const, 
+  items : ['Mercaderias', 'Electrodomesticos', 'Ropa'] as const,
   logLevels: ['debug', 'info', 'warn', 'error'] as const,
   routes: {
     all: '**',

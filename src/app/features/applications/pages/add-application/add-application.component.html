@@ -5,18 +5,176 @@
   </div>
   <div class="main__content__body">
     <form class="login__form" [formGroup]="addApplicationForm" (ngSubmit)="onSubmit()">
+
       <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="name" type="text" />
+          <mat-label>Asegurado</mat-label>
+          <mat-select formControlName="asegurado">
+            <mat-option *ngFor="let currency of appConfig.asegurado" [value]="currency">
+              {{ currency }}
+            </mat-option>
+          </mat-select>
       </mat-form-field>
+  
       <mat-form-field>
-        <mat-label>Número de identificación</mat-label>
-        <input matInput formControlName="policyNumber" type="text" />
+          <mat-label>Pagador</mat-label>
+          <mat-select formControlName="pagador">
+            <mat-option *ngFor="let currency of appConfig.pagador" [value]="currency">
+              {{ currency }}
+            </mat-option>
+          </mat-select>
       </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+          <mat-label>Desde</mat-label>
+          <input matInput [matDatepicker]="desde">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="desde"></mat-datepicker-toggle>
+          <mat-datepicker #desde></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+          <mat-label>Hasta</mat-label>
+          <input matInput [matDatepicker]="hasta">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="hasta"></mat-datepicker-toggle>
+          <mat-datepicker #hasta></mat-datepicker>
+      </mat-form-field>
+  
+  
       <mat-form-field>
-        <mat-label>Descripción</mat-label>
-        <input matInput formControlName="description" type="text" />
+          <mat-label>Tipo de transporte</mat-label>
+          <mat-select formControlName="tipo_transporte">
+            <mat-option *ngFor="let currency of appConfig.TipoTransporte" [value]="currency">
+              {{ currency }}
+            </mat-option>
+          </mat-select>
       </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Perteneciente</mat-label>
+        <input matInput formControlName="perteneciente" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Fecha de embarque</mat-label>
+          <input matInput formControlName="fecha_embarque" type="text" />
+        </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Embarcado por: </mat-label>
+          <input matInput formControlName="embarcado_por" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Embarcado por: </mat-label>
+          <input matInput formControlName="embarcado_por" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Nota de pedido </mat-label>
+        <input matInput formControlName="nota_de_pedido" type="text" />
+    </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>INCOTERMS (buscar): </mat-label>
+          <input matInput formControlName="incoterms_buscar" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>INCOTERMS (buscar): </mat-label>
+          <input matInput formControlName="incoterms_buscar" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Orden de compra </mat-label>
+          <input matInput formControlName="orden_de_compra" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Afianzador de aduana</mat-label>
+          <input matInput formControlName="afianzador_de_aduana" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Items</mat-label>
+          <mat-select formControlName="items">
+            <mat-option *ngFor="let currency of appConfig.items" [value]="currency">
+              {{ currency }}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Marca</mat-label>
+          <input matInput formControlName="marca" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Descripcion del contenido</mat-label>
+          <input matInput formControlName="descripcion_contenido" type="text" />
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Num</mat-label>
+          <input matInput formControlName="num" type="text" /> 
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Peso bruto</mat-label>
+          <input matInput formControlName="peso_bruto" type="text" /> 
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Bultos</mat-label>
+          <input matInput formControlName="bultos" type="text" /> 
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Observaciones</mat-label>
+          <input matInput formControlName="observaciones" type="text" />
+      </mat-form-field>
+      
+      <mat-form-field>
+          <mat-label>Monto total de la compra</mat-label>
+          <input matInput formControlName="monto_total_compra" type="text" /> 
+      </mat-form-field>
+      
+      <mat-form-field>
+          <mat-label>Porcentaje de gastos justificados</mat-label>
+          <input matInput formControlName="porcentaje_gastos_justificados" type="text" /> 
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Suma de las aseguradas</mat-label>
+          <input matInput formControlName="suma_aseguradas" type="text" /> 
+      </mat-form-field>
+      
+      <mat-form-field>
+          <mat-label>Tasa</mat-label>
+          <input matInput formControlName="tasa" type="text" /> 
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Valor de la prima</mat-label>
+          <input matInput formControlName="valor_prima" type="text" /> 
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Cobertura</mat-label>
+          <input matInput formControlName="cobertura" type="text" /> 
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>Deducible</mat-label>
+          <input matInput formControlName="deducible" type="text" /> 
+      </mat-form-field>
+  
+      
+      <mat-form-field>
+          <mat-label>Objeto del seguro</mat-label>
+          <input matInput formControlName="objeto_seguro" type="text" />
+      </mat-form-field>
+  
     </form>
   </div>
   <div class="main__content__footer">
