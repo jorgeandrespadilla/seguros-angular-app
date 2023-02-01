@@ -34,6 +34,16 @@
   width: 100%;
   height: calc(100% - 4px);
   border: 1px solid #e0e0e0;
+  padding: 16px;
+}
+
+.card__header-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .application-card__content {
@@ -41,4 +51,11 @@
   & > p {
     text-overflow: ellipsis;
   }
+}
+
+.card__actions-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
 }
