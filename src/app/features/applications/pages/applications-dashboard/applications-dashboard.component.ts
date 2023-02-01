@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppConfig } from '@app/config/app.config';
 import { AuthService } from '@app/shared/services/auth.service';
 import { ApplicationService } from '../../services/application.service';
+import { GetCompaniesRequest } from '../../services/types';
 
 @Component({
   selector: 'app-applications-dashboard',
@@ -10,12 +13,33 @@ import { ApplicationService } from '../../services/application.service';
 })
 export class ApplicationsDashboardComponent {
 
-  $companies = this.applicationService.getCompanies();
+  filterForm = new FormGroup({
+    fechaInicio: new FormControl(new Date(), [Validators.required]),
+    fechaFin: new FormControl(new Date(), [Validators.required]),
+  });
+
+  $companies = this.applicationService.getCompanies({
+    fechaInicio: undefined,
+    fechaFin: undefined,
+  });
   canAddApplication = this.authenticationService.getAccessToken().role === AppConfig.roles.employee;
 
   constructor(
     private applicationService: ApplicationService,
     private authenticationService: AuthService,
+    private router: Router,
   ) { }
+
+  applyFilter() {
+    const request: GetCompaniesRequest = {
+      fechaInicio: this.filterForm.value.fechaInicio!,
+      fechaFin: this.filterForm.value.fechaFin!,
+    };
+    this.$companies = this.applicationService.getCompanies(request);
+  }
+
+  openDetail(id: number) {
+    this.router.navigate([AppConfig.routes.applications.detail.fullPath.replace(':id', id.toString())]);
+  }
 
 }

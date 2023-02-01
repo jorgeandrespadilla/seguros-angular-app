@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppConfig } from '@app/config/app.config';
+import { AuthGuard } from '@app/shared/guards/auth.guard';
 import { AddApplicationComponent } from './pages/add-application/add-application.component';
 import { ApplicationDetailComponent } from './pages/application-detail/application-detail.component';
 import { ApplicationsDashboardComponent } from './pages/applications-dashboard/applications-dashboard.component';
@@ -12,7 +13,11 @@ const routes: Routes = [
   },
   {
     path: AppConfig.routes.applications.new.currentPath,
-    component: AddApplicationComponent
+    component: AddApplicationComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [AppConfig.roles.employee]
+    }
   },
   {
     path: AppConfig.routes.applications.detail.currentPath,

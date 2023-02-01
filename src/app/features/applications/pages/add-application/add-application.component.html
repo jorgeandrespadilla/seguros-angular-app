@@ -4,22 +4,134 @@
     <h1>Nueva aplicación</h1>
   </div>
   <div class="main__content__body">
-    <form class="login__form" [formGroup]="addApplicationForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="name" type="text" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Número de identificación</mat-label>
-        <input matInput formControlName="policyNumber" type="text" />
-      </mat-form-field>
+    <form class="data__form" [formGroup]="addApplicationForm" (ngSubmit)="onSubmit()">
+
       <mat-form-field>
         <mat-label>Descripción</mat-label>
-        <input matInput formControlName="description" type="text" />
+        <textarea matInput formControlName="description"></textarea>
       </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Desde</mat-label>
+        <input matInput formControlName="desde" type="text" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Hasta</mat-label>
+        <input matInput formControlName="hasta" type="text" />
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Tipo de transporte</mat-label>
+        <mat-select formControlName="tipoTransporte">
+          <mat-option *ngFor="let currency of appConfig.TipoTransporte" [value]="currency">
+            {{ currency }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Perteneciente</mat-label>
+        <input matInput formControlName="perteneciente" type="text" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Fecha de embarque</mat-label>
+        <input matInput [matDatepicker]="fechaEmbarque" formControlName="fechaEmbarque" type="text" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fechaEmbarque"></mat-datepicker-toggle>
+        <mat-datepicker #fechaEmbarque></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Fecha de llegada</mat-label>
+        <input matInput [matDatepicker]="fechaLlegada" formControlName="fechaLlegada" type="text" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="fechaLlegada"></mat-datepicker-toggle>
+        <mat-datepicker #fechaLlegada></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Embarcado por</mat-label>
+        <input matInput formControlName="embarcadoPor" type="text" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nota de pedido</mat-label>
+        <input matInput formControlName="notaDePedido" type="text" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Orden de compra</mat-label>
+        <input matInput formControlName="ordenDeCompra" type="number" min="0" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Marca</mat-label>
+        <input matInput formControlName="marca" type="text" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Descripción del contenido</mat-label>
+        <input matInput formControlName="descripcionContenido" type="text" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Peso bruto</mat-label>
+        <input matInput formControlName="pesoBruto" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Observaciones</mat-label>
+        <input matInput formControlName="observaciones" type="text" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Monto total de la compra</mat-label>
+        <input matInput formControlName="montoTotalCompra" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Porcentaje de gastos justificados</mat-label>
+        <input matInput formControlName="porcentajeGastosJustificados" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Suma de las aseguradas</mat-label>
+        <input matInput formControlName="sumaAseguradas" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Tasa</mat-label>
+        <input matInput formControlName="tasa" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Valor de la prima</mat-label>
+        <input matInput formControlName="valorPrima" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Cobertura</mat-label>
+        <input matInput formControlName="cobertura" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Deducible</mat-label>
+        <input matInput formControlName="deducible" type="number" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Objeto del seguro</mat-label>
+        <input matInput formControlName="objetoSeguro" type="text" />
+      </mat-form-field>
+
+      <div class="form__actions">
+        <button [disabled]="addApplicationForm.invalid" mat-flat-button color="primary" type="submit">Crear</button>
+        <button mat-stroked-button color="primary" type="reset">Cancelar</button>
+      </div>
     </form>
   </div>
-  <div class="main__content__footer">
-    <button mat-raised-button color="primary" (click)="onSubmit()">Guardar</button>
-  </div>
+
 </div>

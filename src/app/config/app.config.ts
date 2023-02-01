@@ -7,9 +7,13 @@ export const APP_CONFIG = new InjectionToken<AppConfigType>('app.config');
 const routeNames = {
   authenticationIndex: 'auth',
   applicationsIndex: 'applications',
+  usersIndex: 'users',
   notFound: '404',
   authentication: {
     login: 'login',
+  },
+  users: {
+    dashboard: 'dashboard',
   },
   applications: {
     dashboard: 'dashboard',
@@ -29,9 +33,14 @@ export const AppConfig = {
   roles: {
     employee: 'Employee',
     executive: 'Executive',
-    all: ['Employee', 'Executive'],
+    admin: 'Administrator',
+    all: ['Employee', 'Executive', 'Administrator'],
   },
   currencies: ['USD', 'EUR', 'RMB'] as const,
+  asegurado: ['Usuario 1', 'Usuario 2'] as const,
+  pagador: ['Seguros del Sur', 'Default Payer', 'Undefined'] as const,
+  TipoTransporte: ['Aire', 'Tierra', 'Mar'] as const,
+  items: ['Mercaderias', 'Electrodomesticos', 'Ropa'] as const,
   logLevels: ['debug', 'info', 'warn', 'error'] as const,
   routes: {
     all: '**',
@@ -47,6 +56,14 @@ export const AppConfig = {
         currentPath: routeNames.authentication.login,
         fullPath: `/${routeNames.authenticationIndex}/${routeNames.authentication.login}`,
       },
+    },
+    users: {
+      currentPath: routeNames.usersIndex,
+      fullPath: `/${routeNames.usersIndex}`,
+      dashboard: {
+        currentPath: routeNames.users.dashboard,
+        fullPath: `/${routeNames.usersIndex}/${routeNames.users.dashboard}`,
+      }
     },
     applications: {
       currentPath: routeNames.applicationsIndex,

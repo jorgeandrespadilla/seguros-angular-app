@@ -2,26 +2,62 @@
 <div class="main__content">
   <div class="main-content__header">
     <h1>Aplicaciones</h1>
-    <a *ngIf="canAddApplication" mat-raised-button color="primary" routerLink="/applications/new" data-cy="add-application-button">
+    <a *ngIf="canAddApplication" mat-flat-button color="primary" routerLink="/applications/new"
+      data-cy="add-application-button">
       Nueva Aplicación
     </a>
   </div>
+  <form class="filter__form" [formGroup]="filterForm" (ngSubmit)="applyFilter()">
+    <mat-form-field>
+      <mat-label>Fecha de inicio</mat-label>
+      <input matInput [matDatepicker]="fechaInicio" formControlName="fechaInicio" type="text" />
+      <mat-datepicker-toggle matIconSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+      <mat-datepicker #fechaInicio></mat-datepicker>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Fecha de fin</mat-label>
+      <input matInput matDatepickerInput [min]="filterForm.get('fechaInicio')?.value" [matDatepicker]="fechaFin" formControlName="fechaFin" type="text" />
+      <mat-datepicker-toggle matIconSuffix [for]="fechaFin"></mat-datepicker-toggle>
+      <mat-datepicker #fechaFin></mat-datepicker>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+    </mat-form-field>
+    <button [disabled]="filterForm.invalid" mat-flat-button color="primary" (click)="applyFilter()">Buscar</button>
+  </form>
+
+  <div *ngIf="($companies | async)?.length === 0" class="muted">
+    <h2>No hay compañías disponibles</h2>
+  </div>
   <div *ngFor="let company of $companies | async; let i = index">
     <h2>{{ company.name }}</h2>
-    <mat-grid-list cols="3" rowHeight="2:1" gutterSize="24px" class="applications-list">
-      <mat-grid-tile *ngFor="let app of company.application">
+    <div *ngIf="company.application.length === 0" class="muted">
+      <h3>No hay aplicaciones disponibles</h3>
+    </div>
+    <div class="applications-list">
+      <div *ngFor="let app of company.application">
         <mat-card class="application-card">
           <mat-card-header>
-            <mat-card-title>{{ app.name }}</mat-card-title>
-            <mat-card-subtitle>{{ app.policyNumber }}</mat-card-subtitle>
+            <div class="card__header-wrapper">
+              <div>
+                <mat-card-title>{{ app.policyNumber }}</mat-card-title>
+                <mat-card-subtitle>{{ app.createdDate|date:'dd/MM/yyyy'}}</mat-card-subtitle>
+              </div>
+              <button mat-icon-button aria-label="Ver más" (click)="openDetail(app.id)">
+                <mat-icon class="link">open_in_new</mat-icon>
+              </button>
+            </div>
           </mat-card-header>
           <mat-card-content class="application-card__content">
             <p>
               {{ app.description }}
             </p>
           </mat-card-content>
+          <mat-card-actions class="card__actions-wrapper">
+            <button mat-button color="primary">Aprobar</button>
+            <button mat-button color="warn">Rechazar</button>
+          </mat-card-actions>
         </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+      </div>
+    </div>
   </div>
 </div>

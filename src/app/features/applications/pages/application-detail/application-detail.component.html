@@ -1,1 +1,59 @@
-<p>application-detail works!</p>
+<app-navigation-bar></app-navigation-bar>
+<div class="main__content">
+  <div class="main__content__header">
+    <h1>Aplicación</h1>
+  </div>
+  <div *ngIf="applicationDetail">
+    <div class="field-info">
+      <label>Numero de póliza</label>
+      <span>{{applicationDetail.policyNumber}}</span>
+    </div>
+    <div class="field-info">
+      <label>Descripción</label>
+      <span>{{applicationDetail.description}}</span>
+    </div>
+    <div class="field-info">
+      <label>Fecha de creación</label>
+      <span>{{applicationDetail.createdAt | date:'dd/MM/yyyy'}}</span>
+    </div>
+    <div class="field-info">
+      <label>Desde</label>
+      <span>{{applicationDetail.desde}}</span>
+    </div>
+    <div class="field-info">
+      <label>Hasta</label>
+      <span>{{applicationDetail.hasta}}</span>
+    </div>
+    <div class="field-info">
+      <label>Tipo de transporte</label>
+      <span>{{applicationDetail.tipoTransporte}}</span>
+    </div>
+    <div class="field-info">
+      <label>Perteneciente</label>
+      <span>{{applicationDetail.perteneciente}}</span>
+    </div>
+    <div class="field-info">
+      <label>Fecha de embarque</label>
+      <span>{{applicationDetail.fechaEmbarque | date:'dd/MM/yyyy'}}</span>
+    </div>
+    <div class="field-info">
+      <label>Fecha de llegada</label>
+      <span>{{applicationDetail.fechaLlegada | date:'dd/MM/yyyy'}}</span>
+    </div>
+    <div class="field-info">
+      <label>Embarcado por</label>
+      <span>{{applicationDetail.embarcadoPor}}</span>
+    </div>
+    <div class="field-info">
+      <label>Nota de pedido</label>
+      <span>{{applicationDetail.notaDePedido}}</span>
+    </div>
+  </div>
+  <div *ngIf="!applicationDetail">
+    <p class="muted">No se encontró la información de la aplicación</p>
+  </div>
+
+  <a mat-flat-button color="primary" routerLink="{{ appConfig.routes.home }}">
+    Volver
+  </a>
+</div>

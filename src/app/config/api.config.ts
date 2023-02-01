@@ -10,9 +10,14 @@ export const ApiConfig = {
     authentication: {
       login: '/auth/login',
     },
+    users: {
+      getCompaniesRoles: '/auth/GetCompaniesRoles',
+      createUser: '/auth/register',
+    },
     applications: {
       companies: '/Companies',
       addApplication: '/Companies/Application',
+      getApplication: '/Companies/GetApplicationById',
     },
   },
   url: (path: string) => ApiConfig.baseUrl + path,
