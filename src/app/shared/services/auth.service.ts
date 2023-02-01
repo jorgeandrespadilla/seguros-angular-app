@@ -39,6 +39,10 @@ export class AuthService {
     return this.tryDecodeToken(this.getRawAccessToken());
   }
 
+  public getRole(): string {
+    return this.getAccessToken().role;
+  }
+
   private tryDecodeToken(token: string): TokenData {
     try {
       return jwtDecode(token);
