@@ -47,7 +47,7 @@
       <mat-form-field>
         <mat-label>Fecha de llegada</mat-label>
         <input matInput [matDatepicker]="fechaLlegada" formControlName="fechaLlegada" type="text" />
-        <mat-hint>MM/DD/YY</mat-hint>
+        <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="fechaLlegada"></mat-datepicker-toggle>
         <mat-datepicker #fechaLlegada></mat-datepicker>
       </mat-form-field>
@@ -73,7 +73,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Descripcion del contenido</mat-label>
+        <mat-label>Descripción del contenido</mat-label>
         <input matInput formControlName="descripcionContenido" type="text" />
       </mat-form-field>
 

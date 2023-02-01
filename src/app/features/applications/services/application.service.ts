@@ -13,10 +13,15 @@ export class ApplicationService {
     private http: HttpClient,
   ) { }
   getCompanies(request: GetCompanies): Observable<Company[]> {
+    const params = new HttpParams();
+    if (request.fechaInicio) {
+      params.set('fechaInicio', request.fechaInicio.toISOString());
+    }
+    if (request.fechaFin) {
+      params.set('fechaFin', request.fechaFin.toISOString());
+    }
     return this.http.get<Company | Company[]>(ApiConfig.url(ApiConfig.endpoints.applications.companies), {
-      params: new HttpParams()
-        .set('fechaInicio', request.fechaInicio.toISOString())
-        .set('fechaFin', request.fechaFin.toISOString())
+      params: params,
     }).pipe(
       map((data => Array.isArray(data) ? data : [data]))
     );

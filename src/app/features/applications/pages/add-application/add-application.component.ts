@@ -44,7 +44,6 @@ export class AddApplicationComponent {
     @Inject(APP_CONFIG) public appConfig: AppConfig
   ) {
     this.addApplicationForm.valueChanges.subscribe(console.log);
-
   }
 
   onSubmit() {
