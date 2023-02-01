@@ -1,1 +1,30 @@
-<p>users-dashboard works!</p>
+<h1>Crear usuarios</h1>
+
+<form *ngIf="companiesRoles" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="username" type="text" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="text" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Roles</mat-label>
+        <mat-select formControlName="roleId">
+            <mat-option *ngFor="let role of companiesRoles.roles" [value]="role.id">
+                {{ role.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="form.get('roleId')?.value === employeeId">
+        <mat-label>Compañia</mat-label>
+        <mat-select formControlName="companyId">
+            <mat-option *ngFor="let company of companiesRoles.companies" [value]="company.id">
+                {{ company.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit">Crear</button>
+</form>
