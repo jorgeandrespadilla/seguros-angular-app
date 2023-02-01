@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { APP_CONFIG } from '@config/app.config';
 import { AppConfig, Currency } from '@config/types';
 import { LoginService } from '@app/features/authentication/services/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
   });
 
   constructor(
+    private snackBar: MatSnackBar,
     private loginService: LoginService,
     private router: Router,
     @Inject(APP_CONFIG) public appConfig: AppConfig,
@@ -49,6 +51,9 @@ export class LoginComponent {
           this.router.navigate([this.appConfig.routes.root.fullPath]);
         },
         error: (error) => {
+          this.snackBar.open('Credenciales inválidas', 'Aceptar', {
+            duration: 5000,
+          });
           console.error('AuthenticationService.login() error:', error);
         }
       });

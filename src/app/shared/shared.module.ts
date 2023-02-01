@@ -11,13 +11,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
-// MatNativeModule
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { AppConfig, APP_CONFIG } from '@config/app.config';
 import { ApiConfig, API_CONFIG } from '@config/api.config';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -54,6 +54,8 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
     MatButtonModule,
     MatToolbarModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }
