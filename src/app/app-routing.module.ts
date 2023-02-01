@@ -12,7 +12,17 @@ const routes: Routes = [
   {
     path: AppConfig.routes.applications.currentPath,
     loadChildren: () => import('./features/applications/applications.module').then(m => m.ApplicationsModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: [AppConfig.roles.employee, AppConfig.roles.executive]
+    }
+  },
+  {
+    path: AppConfig.routes.users.currentPath,
+    loadChildren: () => import('./features/users/users.module').then(m => m.UsersModule),
+    canActivate: [AuthGuard], data: {
+      roles: [AppConfig.roles.admin]
+    }
   },
   {
     path: AppConfig.routes.notFound.currentPath,
