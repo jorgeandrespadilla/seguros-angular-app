@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppConfig } from '@app/config/app.config';
 import { AuthService } from '@app/shared/services/auth.service';
 import { ApplicationService } from '../../services/application.service';
@@ -26,6 +27,7 @@ export class ApplicationsDashboardComponent {
   constructor(
     private applicationService: ApplicationService,
     private authenticationService: AuthService,
+    private router: Router,
   ) { }
 
   applyFilter() {
@@ -34,6 +36,10 @@ export class ApplicationsDashboardComponent {
       fechaFin: this.filterForm.value.fechaFin!,
     };
     this.$companies = this.applicationService.getCompanies(request);
+  }
+
+  openDetail(id: number) {
+    this.router.navigate([AppConfig.routes.applications.detail.fullPath.replace(':id', id.toString())]);
   }
 
 }
