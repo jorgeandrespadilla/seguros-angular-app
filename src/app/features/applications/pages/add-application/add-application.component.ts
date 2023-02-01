@@ -66,13 +66,12 @@ export class AddApplicationComponent {
       montoTotalCompra: Number(this.addApplicationForm.get('montoTotalCompra')?.value!),
       porcentajeGastosJustificados: Number(this.addApplicationForm.get('porcentajeGastosJustificados')?.value!),
       sumaAseguradas: Number(this.addApplicationForm.get('sumaAseguradas')?.value!),
-      tasa: this.addApplicationForm.get<string>('tasa')?.value!,
+      tasa: Number(this.addApplicationForm.get('tasa')?.value!),
       valorPrima: Number(this.addApplicationForm.get('valorPrima')?.value!),
       cobertura: this.addApplicationForm.get('cobertura')?.value!,
       deducible: Number(this.addApplicationForm.get('deducible')?.value!),
       objetoSeguro: this.addApplicationForm.get('objetoSeguro')?.value!
     };
-    debugger
     this.applicationService.addApplication(request)
       .subscribe({
         complete: () => {
