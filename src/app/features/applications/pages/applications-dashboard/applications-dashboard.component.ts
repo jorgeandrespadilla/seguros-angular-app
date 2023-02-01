@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppConfig } from '@app/config/app.config';
 import { AuthService } from '@app/shared/services/auth.service';
 import { ApplicationService } from '../../services/application.service';
-import { GetCompanies } from '../../services/types';
+import { GetCompaniesRequest } from '../../services/types';
 
 @Component({
   selector: 'app-applications-dashboard',
@@ -29,7 +29,7 @@ export class ApplicationsDashboardComponent {
   ) { }
 
   applyFilter() {
-    const request: GetCompanies = {
+    const request: GetCompaniesRequest = {
       fechaInicio: this.filterForm.value.fechaInicio!,
       fechaFin: this.filterForm.value.fechaFin!,
     };

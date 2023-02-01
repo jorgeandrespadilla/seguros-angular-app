@@ -7,7 +7,7 @@
     <form class="login__form" [formGroup]="addApplicationForm" (ngSubmit)="onSubmit()">
 
       <mat-form-field>
-        <mat-label>Descripcion</mat-label>
+        <mat-label>Descripción</mat-label>
         <input matInput formControlName="description" type="text" />
       </mat-form-field>
 
@@ -53,17 +53,17 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Embarcado por: </mat-label>
+        <mat-label>Embarcado por</mat-label>
         <input matInput formControlName="embarcadoPor" type="text" />
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Nota de pedido </mat-label>
+        <mat-label>Nota de pedido</mat-label>
         <input matInput formControlName="notaDePedido" type="text" />
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Orden de compra </mat-label>
+        <mat-label>Orden de compra</mat-label>
         <input matInput formControlName="ordenDeCompra" type="number" min="0" />
       </mat-form-field>
 

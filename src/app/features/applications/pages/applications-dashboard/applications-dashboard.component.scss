@@ -1,17 +1,16 @@
-.main-content__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
+@import "../../../../styles/mixins";
 
 .filter__form {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin-bottom: 24px;
   & > *:not(:last-child) {
     margin-right: 20px;
   }
-  margin-bottom: 20px;
+  @include for-desktop-up {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .applications-list {

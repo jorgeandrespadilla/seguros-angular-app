@@ -25,13 +25,20 @@
     <button [disabled]="filterForm.invalid" mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
   </form>
 
+  <div *ngIf="($companies | async)?.length === 0" class="muted">
+    <h2>No hay compañías disponibles</h2>
+  </div>
   <div *ngFor="let company of $companies | async; let i = index">
     <h2>{{ company.name }}</h2>
+    <div *ngIf="company.application.length === 0" class="muted">
+      <h3>No hay aplicaciones disponibles</h3>
+    </div>
     <mat-grid-list cols="3" gutterSize="24px" class="applications-list">
       <mat-grid-tile *ngFor="let app of company.application">
         <mat-card class="application-card">
           <mat-card-header>
-            <mat-card-subtitle>{{ app.policyNumber }}</mat-card-subtitle>
+            <mat-card-title>{{ app.policyNumber }}</mat-card-title>
+            <mat-card-subtitle>{{ app.createdDate|date:'dd/MM/yyyy'}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="application-card__content">
             <p>

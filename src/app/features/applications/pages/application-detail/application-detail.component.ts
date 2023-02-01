@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ApplicationService } from '../../services/application.service';
 import { ApplicationDetail } from '../../services/types';
 

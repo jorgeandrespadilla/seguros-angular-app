@@ -27,10 +27,12 @@ export interface Application {
   id: number;
   policyNumber: number;
   description: string;
-  fechaCreacion: Date;
+  createdDate: Date;
 }
 
-export interface ApplicationDetail extends AddApplication, Application { }
+export interface ApplicationDetail extends AddApplication, Application {
+  createdAt: Date;
+}
 
 export interface Company {
   id: number;
@@ -38,7 +40,7 @@ export interface Company {
   application: Application[];
 }
 
-export interface GetCompanies {
+export interface GetCompaniesRequest {
   fechaInicio?: Date;
   fechaFin?: Date;
 }
