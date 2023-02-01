@@ -4,11 +4,11 @@
     <h1>Nueva aplicación</h1>
   </div>
   <div class="main__content__body">
-    <form class="login__form" [formGroup]="addApplicationForm" (ngSubmit)="onSubmit()">
+    <form class="data__form" [formGroup]="addApplicationForm" (ngSubmit)="onSubmit()">
 
       <mat-form-field>
         <mat-label>Descripción</mat-label>
-        <input matInput formControlName="description" type="text" />
+        <textarea matInput formControlName="description"></textarea>
       </mat-form-field>
 
       <mat-form-field>
@@ -127,9 +127,9 @@
         <input matInput formControlName="objetoSeguro" type="text" />
       </mat-form-field>
 
-      <div class="main__content__footer">
-        <button [disabled]="addApplicationForm.invalid" mat-raised-button color="primary"
-          (click)="onSubmit()">Guardar</button>
+      <div class="form__actions">
+        <button [disabled]="addApplicationForm.invalid" mat-flat-button color="primary" type="submit">Crear</button>
+        <button mat-stroked-button color="primary" type="reset">Cancelar</button>
       </div>
     </form>
   </div>

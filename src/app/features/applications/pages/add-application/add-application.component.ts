@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { APP_CONFIG } from '@app/config/app.config';
 import { AppConfig } from '@app/config/types';
@@ -39,6 +40,7 @@ export class AddApplicationComponent {
   });
 
   constructor(
+    private snackBar: MatSnackBar,
     private router: Router,
     private applicationService: ApplicationService,
     @Inject(APP_CONFIG) public appConfig: AppConfig
@@ -75,10 +77,16 @@ export class AddApplicationComponent {
     this.applicationService.addApplication(request)
       .subscribe({
         complete: () => {
-          console.log('ApplicationService.addApplication() complete');
+          this.snackBar.open('Aplicación creada', 'Aceptar', {
+            duration: 5000
+          });
+          console.log('worked');
         },
         error: (error) => {
-          console.error('ApplicationService.addApplication() error:', error);
+          this.snackBar.open('Error al crear la aplicación', 'Aceptar', {
+            duration: 5000
+          });
+          console.error('error', error);
         }
       });
     this.router.navigate([this.appConfig.routes.applications.fullPath]);

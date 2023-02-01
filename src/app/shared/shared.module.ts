@@ -18,6 +18,7 @@ import { AppConfig, APP_CONFIG } from '@config/app.config';
 import { ApiConfig, API_CONFIG } from '@config/api.config';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSelectModule,
     MatButtonModule,
     MatToolbarModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: APP_CONFIG, useValue: AppConfig },
@@ -55,7 +57,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatToolbarModule,
     MatGridListModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ]
 })
 export class SharedModule { }

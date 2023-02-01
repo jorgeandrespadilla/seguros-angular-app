@@ -1,30 +1,44 @@
-<h1>Crear usuarios</h1>
+<app-navigation-bar></app-navigation-bar>
+<div class="main__content">
 
-<form *ngIf="companiesRoles" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-        <mat-label>Email</mat-label>
+  <h1>Crear usuarios</h1>
+
+  <div class="main__content__body">
+    <form class="data__form" *ngIf="companiesRoles" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Correo electrónico</mat-label>
         <input matInput formControlName="username" type="text" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="text" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Roles</mat-label>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput placeholder="Ingrese su contraseña" formControlName="password"
+          [type]="hidePassword ? 'password' : 'text'" />
+        <mat-icon matSuffix [title]="hidePassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+          (click)="togglePassword()" [style.cursor]="'pointer'" class="muted">{{ hidePassword ? 'visibility_off' :
+          'visibility'
+          }}</mat-icon>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Rol</mat-label>
         <mat-select formControlName="roleId">
-            <mat-option *ngFor="let role of companiesRoles.roles" [value]="role.id">
-                {{ role.name }}
-            </mat-option>
+          <mat-option *ngFor="let role of companiesRoles.roles" [value]="role.id">
+            {{ role.name }}
+          </mat-option>
         </mat-select>
-    </mat-form-field>
+      </mat-form-field>
 
-    <mat-form-field *ngIf="form.get('roleId')?.value === employeeId">
-        <mat-label>Compañia</mat-label>
+      <mat-form-field *ngIf="form.get('roleId')?.value === employeeId">
+        <mat-label>Compañía</mat-label>
         <mat-select formControlName="companyId">
-            <mat-option *ngFor="let company of companiesRoles.companies" [value]="company.id">
-                {{ company.name }}
-            </mat-option>
+          <mat-option *ngFor="let company of companiesRoles.companies" [value]="company.id">
+            {{ company.name }}
+          </mat-option>
         </mat-select>
-    </mat-form-field>
-    <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit">Crear</button>
-</form>
+      </mat-form-field>
+      <div class="form__actions">
+        <button [disabled]="form.invalid" mat-flat-button color="primary" type="submit">Crear</button>
+        <button mat-stroked-button color="primary" type="reset">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

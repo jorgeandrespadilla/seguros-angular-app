@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppConfig } from '@app/config/app.config';
-import { ApplicationService } from '@app/features/applications/services/application.service';
 import { CreateUser, GetCompaniesRoles } from '../../services/types';
 import { UserService } from '../../services/user.service';
 
@@ -11,54 +11,73 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./users-dashboard.component.scss']
 })
 export class UsersDashboardComponent {
-  
-    form = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      companyId: ['', [Validators.required]],
-      roleId: ['', [Validators.required]],
-    });
+  hidePassword = true;
 
-    companiesRoles?: GetCompaniesRoles
-    employeeId?: string;
+  form = new FormGroup({
+    username: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+    roleId: new FormControl('', [Validators.required]),
+    companyId: new FormControl('', []),
+  });
 
-    constructor(private userService: UserService, private applicationService: ApplicationService, private formBuilder: FormBuilder) {
-      
-    }
+  companiesRoles?: GetCompaniesRoles
+  employeeId?: string;
 
-    ngOnInit(): void {
-      this.userService.getCompaniesRoles().subscribe({
-        next: (data) => {
-          console.log(data);
-          this.companiesRoles = data;
-          this.employeeId = this.companiesRoles?.roles.find(role => role.name === AppConfig.roles.employee)?.id;
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
-    }
+  constructor(
+    private snackBar: MatSnackBar,
+    private userService: UserService,
+  ) { }
 
-
-    onSubmit() {
-      const roleId = this.form.value.roleId!
-
-      const payload: CreateUser = {
-        username: this.form.value.username!,
-        password: this.form.value.password!,
-        roleId: roleId,
-        companyId: roleId === this.employeeId ? Number(this.form.value.companyId!) : undefined
+  ngOnInit(): void {
+    this.form.get("roleId")?.valueChanges.subscribe((value) => this.roleValidator(value!));
+    this.userService.getCompaniesRoles().subscribe({
+      next: (data) => {
+        console.log(data);
+        this.companiesRoles = data;
+        this.employeeId = this.companiesRoles?.roles.find(role => role.name === AppConfig.roles.employee)?.id;
+      },
+      error: (error) => {
+        console.log(error);
       }
+    });
+  }
 
-      this.userService.createUser(payload).subscribe({
-        next: (data) => {
-          console.log("worked")
-          console.log(data);
-        },
-        error: (error) => {
-          console.log("error")
-          console.log(error);
-        }
-      });
+  togglePassword() {
+    this.hidePassword = !this.hidePassword;
+  }
+
+  roleValidator(roleId: string) {
+    if (roleId === this.employeeId) {
+      this.form.controls.companyId.setValidators([Validators.required]);
+    } else {
+      this.form.controls.companyId.clearValidators();
     }
+    this.form.controls.companyId.updateValueAndValidity();
+  }
+
+  onSubmit() {
+    const roleId = this.form.value.roleId!
+
+    const payload: CreateUser = {
+      username: this.form.value.username!,
+      password: this.form.value.password!,
+      roleId: roleId,
+      companyId: roleId === this.employeeId ? Number(this.form.value.companyId!) : undefined
+    }
+
+    this.userService.createUser(payload).subscribe({
+      next: (data) => {
+        this.snackBar.open('Usuario creado', 'Aceptar', {
+          duration: 5000,
+        });
+        console.log("worked", data);
+      },
+      error: (error) => {
+        this.snackBar.open('Error al crear usuario', 'Aceptar', {
+          duration: 5000,
+        });
+        console.log("error", error);
+      }
+    });
+  }
 }

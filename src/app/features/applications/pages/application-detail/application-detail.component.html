@@ -52,4 +52,8 @@
   <div *ngIf="!applicationDetail">
     <p class="muted">No se encontró la información de la aplicación</p>
   </div>
+
+  <a mat-flat-button color="primary" routerLink="{{ appConfig.routes.home }}">
+    Volver
+  </a>
 </div>

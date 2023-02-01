@@ -2,7 +2,7 @@
 <div class="main__content">
   <div class="main-content__header">
     <h1>Aplicaciones</h1>
-    <a *ngIf="canAddApplication" mat-raised-button color="primary" routerLink="/applications/new"
+    <a *ngIf="canAddApplication" mat-flat-button color="primary" routerLink="/applications/new"
       data-cy="add-application-button">
       Nueva Aplicación
     </a>
@@ -22,7 +22,7 @@
       <mat-datepicker #fechaFin></mat-datepicker>
       <mat-hint>MM/DD/YYYY</mat-hint>
     </mat-form-field>
-    <button [disabled]="filterForm.invalid" mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+    <button [disabled]="filterForm.invalid" mat-flat-button color="primary" (click)="applyFilter()">Buscar</button>
   </form>
 
   <div *ngIf="($companies | async)?.length === 0" class="muted">

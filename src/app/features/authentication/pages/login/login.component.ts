@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  revealPassword = false;
+  hidePassword = true;
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -31,7 +31,7 @@ export class LoginComponent {
   }
 
   togglePassword() {
-    this.revealPassword = !this.revealPassword;
+    this.hidePassword = !this.hidePassword;
   }
 
   onSubmit() {

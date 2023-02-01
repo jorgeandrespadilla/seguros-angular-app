@@ -19,13 +19,14 @@
   margin-bottom: 24px;
 }
 
-.login__form {
+.data__form {
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  width: 400px;
-  padding: 2.5rem;
+  padding-block: 1rem;
   border-radius: 1rem;
 
   .mat-mdc-form-field {
@@ -34,6 +35,21 @@
 
   .mat-mdc-form-field + .mat-mdc-form-field {
     margin-top: 0.5rem;
+  }
+
+  .form__actions {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+
+    button {
+      width: 100%;
+      padding: 1.5rem 3rem;
+      font-size: 1rem;
+    }
   }
 }
 
